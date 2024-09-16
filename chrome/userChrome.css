@@ -1,104 +1,93 @@
-/* To make color changes, change the variables in both the userChrome AND userContent files */
+/* Defines styling for browsers' chrome (UI). */
 
-:root{
-/* NORMAL BROWSING COLORS */
-	--95grey:#c9c9c9;
-	--home-bground:#E5E5E5;
-	--3d-darkest:#0a0a0a;
-	--3d-dark:#808080;
-	--3d-light:#dfdfdf;
-	--3d-lightest:#ffffff;
-	--urlbar-bg:#ffffff;
-	--button-colour:#0a0a0a;
-	
-/* Defines the 3d effect in normal browsing. */
-	--95convex:inset -1px -1px var(--3d-darkest),inset 1px 1px var(--3d-lightest),inset -2px -2px var(--3d-dark),inset 2px 2px var(--3d-light);
-	--95concave:inset -1px -1px var(--3d-lightest),inset 1px 1px var(--3d-dark),inset -2px -2px var(--3d-light),inset 2px 2px var(--3d-darkest);
+:root {
+  /* Custom vars */
 
+  --95grey: #c9c9c9;
+  --home-bground: #e5e5e5;
+  --3d-darkest: #0a0a0a;
+  --3d-dark: #808080;
+  --3d-light: #dfdfdf;
+  --3d-lightest: #ffffff;
+  --urlbar-bg: #ffffff;
+  --button-colour: #0a0a0a;
 
-/* PRIVATE BROWSING COLORS */
-	--pb95grey:#c9c9c9;
-	--pb-home-bground:#E5E5E5;
-	--pb-3d-darkest:#0a0a0a;
-	--pb-3d-dark:#808080;
-	--pb-3d-light:#dfdfdf;
-	--pb-3d-lightest:#ffffff;
-	--pb-urlbar-bg:#ffffff;
-	--pb-button-colour:#000000;
+  --95convex: inset -1px -1px var(--3d-darkest), inset 1px 1px var(--3d-lightest), inset -2px -2px var(--3d-dark), inset 2px 2px var(--3d-light);
+  --95concave: inset -1px -1px var(--3d-lightest), inset 1px 1px var(--3d-dark), inset -2px -2px var(--3d-light), inset 2px 2px var(--3d-darkest);
 
-/* Defines the 3d effect in private browsing. */
-	--pb-95convex:inset -1px -1px var(--pb-3d-darkest),inset 1px 1px var(--pb-3d-lightest),inset -2px -2px var(--pb-3d-dark),inset 2px 2px var(--pb-3d-light);
-	--pb-95concave:inset -1px -1px var(--pb-3d-lightest),inset 1px 1px var(--pb-3d-dark),inset -2px -2px var(--pb-3d-light),inset 2px 2px var(--pb-3d-darkest);
+  /* Modified Firefox vars */
+
+  --toolbarbutton-inner-padding: 5px !important;
+  --panel-border-radius: 0 !important;
 }
 
+/* [Toolbar] */
 
+.browser-toolbar { background-color: var(--95grey) !important; }
+.toolbar-items { background-color: var(--95grey) !important; }
+.toolbarbutton-1 {
+  border-radius: 0 !important;
+  color: #0a0a0a !important;
+  fill: var(--button-colour) !important;
+  padding: 0 !important;
+}
+.toolbarbutton-1:hover { border-radius: 0 !important; }
+.toolbarbutton-1 > .toolbarbutton-icon,
+.toolbarbutton-1 > .toolbarbutton-text,
+.toolbarbutton-1 > .toolbarbutton-badge-stack {
+  border-radius: 0 !important; 
+}
+.toolbarbutton-icon { border-radius: 0 !important; }
+
+/* [Tabs] */
+
+#tabbrowser-tabs { padding-inline-start: 0 !important; }
+#tabbrowser-tabs:not([secondarytext-unsupported]) & { height: 17px !important; }
+/* Tabs > Tab */
+.tabbrowser-tab { padding: 0 !important; }
+.tab-content { color: var(--button-colour) !important; }
+.tab-background {
+  border-radius: 0 !important;
+  min-height: 0 !important;
+  margin-block: 0 !important;
+}
+.tab-background[selected] {
+  box-shadow: var(--95convex) !important;
+  border-radius: 0 !important;
+  background-color: var(--95grey) !important;
+  background-image: none !important;
+}
+/* Tabs > Tab > Accessories */
 .tabbrowser-tab[label^="New Tab"] .tab-icon-image {
-      content: url("ff-std-alt.svg") !important;
+  content: url("resources/img/ff-std-alt.svg") !important;
 }
+.tab-close-button { border-radius: 0 !important; }
+.tab-icon-sound-playing-label { display: none; }
+/* Tabs > Misc */
+.tabs-newtab-button:hover { border-radius: 0 !important; }
+.tabs-newtab-button:hover .toolbarbutton-icon { border-radius: 0 !important; }
 
-#nav-bar:not([tabs-hidden="true"]) {
-    box-shadow: 0px -1px 0px 0px grey !important;
-}
-.browser-toolbar{
-    background-color: var(--95grey) !important;
-}
-.tab-background[selected]{
- 	box-shadow: var(--95convex)  !important;
-	border-radius:0 !important;
-    background-color: var(--95grey) !important;
-    background-image: none !important;
-}
-.tab-background{
-    border-radius: 0px !important;
-}
-.tab-content{
-    color: var(--button-colour) !important;
-}
+/* [Navbar] */
 
-#TabsToolbar .tabs-newtab-button:hover {
-    border-radius:0 !important;
+#nav-bar:not([tabs-hidden="true"]) { box-shadow: 0px -1px 0px 0px grey !important; }
+/* Navbar > URL bar */
+#urlbar-background {
+  background-color: var(--urlbar-bg) !important;
+  outline: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: var(--95concave) !important;
 }
-.tabs-newtab-button:hover .toolbarbutton-icon {
-   border-radius:0 !important;
+#urlbar[focused="true"]:not([suppress-focus-border]) > #urlbar-background {
+  border: 1px solid #000080 !important;
 }
-#urlbar-background{
-	background-color:var(--urlbar-bg) !important;
-    outline: none !important;
-    border:none !important;
-    border-radius: 0px !important;
-    box-shadow: var(--95concave) !important;
-}
-#urlbar[focused="true"]:not([suppress-focus-border]) > #urlbar-background, #searchbar:focus-within{
-    border:1px solid #000080 !important;
-}
-.toolbarbutton-1{
-    border-radius: 0px !important;
-    color: #0a0a0a !important;
-    fill: var(--button-colour) !important;
-}
-.toolbarbutton-icon{
-    border-radius: 0px !important;
-}
-.toolbarbutton-1 > .toolbarbutton-icon, toolbar .toolbarbutton-1 > .toolbarbutton-text, toolbar .toolbarbutton-1 > .toolbarbutton-badge-stack{
-    border-radius: 0px !important; 
-}
-.toolbarbutton-1:hover{
-    border-radius: 0px !important;
-}
-.toolbar-items{
-    background-color: var(--95grey) !important;
-}
-.PanelUI-subView{
-    background-color: var(--95grey) !important;
-    box-shadow: var(--95convex) !important;
-   /* color: black; */
-}
-.cui-widget-panel, .panel-no-padding{
-    --panel-border-radius: 0px !important;
-}
+/* Navbar > URL bar > Accessories */
+.urlbar-go-button { border-radius: 0 !important; }
+.identity-box-button { border-radius: 0 !important; }
+#tracking-protection-icon-container { border-radius: 0 !important; }
 
-.autoscroller {
-  background-image: size_all.png !important;
+/* [Panel] */
+.PanelUI-subView {
+  background-color: var(--95grey) !important;
+  box-shadow: var(--95convex) !important;
 }
-
-
